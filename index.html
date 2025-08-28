@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traidee AI - Never Miss Another Lead</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #391f47;
+            --white: #ffffff;
+            --accent: #63de99;
+            --light-gray: #f8f9fa;
+            --text-gray: #666;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo-ai {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .try-free-btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .try-free-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 222, 153, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, rgba(57, 31, 71, 0.05) 0%, rgba(99, 222, 153, 0.05) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-left h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-left h1 span {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 222, 153, 0.3);
+        }
+
+        .secondary-btn {
+            color: var(--primary);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-right {
+            position: relative;
+        }
+
+        .phone-mockup {
+            background: var(--primary);
+            border-radius: 30px;
+            padding: 2rem;
+            color: var(--white);
+            box-shadow: 0 20px 60px rgba(57, 31, 71, 0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+        }
+
+        .phone-screen {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .voice-wave {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin: 2rem 0;
+        }
+
+        .voice-bar {
+            width: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .voice-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .voice-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .voice-bar:nth-child(3) { height: 25px; animation-delay: 0.2s; }
+        .voice-bar:nth-child(4) { height: 40px; animation-delay: 0.3s; }
+        .voice-bar:nth-child(5) { height: 30px; animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 4rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+        }
+
+        .problem-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-description {
+            color: var(--text-gray);
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 4rem 5%;
+            background: var(--light-gray);
+        }
+
+        .solution-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .solution-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .solution-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .solution-features {
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        .check {
+            color: var(--accent);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* How It Works */
+        .how-section {
+            padding: 4rem 5%;
+            background: var(--white);
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .step:nth-child(even) {
+            direction: rtl;
+        }
+
+        .step:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .step-content h3 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--primary);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-visual {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .example-box {
+            background: var(--white);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .example-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Industries Section */
+        .industries-section {
+            padding: 4rem 5%;
+            background: var(--light-gray);
+        }
+
+        .industries-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .industry-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .industry-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .industry-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary) 0%, #4a2859 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1.25rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(99, 222, 153, 0.3);
+        }
+
+        .trust-text {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-links a:not(.try-free-btn) {
+                display: none;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+            
+            .step {
+                grid-template-columns: 1fr;
+            }
+            
+            .step:nth-child(even) {
+                direction: ltr;
+            }
+            
+            .hero-stats {
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Tr<span class="logo-ai">ai</span>dee AI</a>
+            <ul class="nav-links">
+                <li><a href="#how">How it Works</a></li>
+                <li><a href="#industries">Industries</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#" class="try-free-btn">Try Free</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1>Stop Losing Jobs to <span>Missed Calls</span></h1>
+                <p class="hero-subtitle">
+                    Every missed call is money walking away. Traidee AI answers instantly, 
+                    books jobs automatically, and turns your voice into invoices—so you can 
+                    focus on the work, not the phone.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">68%</div>
+                        <div class="stat-label">of calls missed on job sites</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">£2,400</div>
+                        <div class="stat-label">avg job value lost monthly</div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#" class="primary-btn">Start Free - No Card Required</a>
+                    <a href="#how" class="secondary-btn">See how it works →</a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Incoming call...</p>
+                        <div class="voice-wave">
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                        </div>
+                        <p style="font-weight: 600; margin-bottom: 1rem;">"Hi, this is Dave's Plumbing"</p>
+                        <p style="font-size: 0.95rem; line-height: 1.5;">
+                            "I can help you today. Are you calling about a repair or a new installation?"
+                        </p>
+                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2);">
+                            <p style="font-size: 0.85rem; opacity: 0.7;">AI Assistant Active</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="section-header">
+            <h2 class="section-title">The Reality of Running a Trade Business</h2>
+            <p class="section-subtitle">Sound familiar? You're not alone.</p>
+        </div>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-emoji">📱</div>
+                <h3 class="problem-title">Can't Answer When Working</h3>
+                <p class="problem-description">
+                    Up a ladder, under a sink, or driving between jobs—customers won't wait, 
+                    they'll just call the next number on Google.
+                </p>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-emoji">📝</div>
+                <h3 class="problem-title">Evening Admin Nightmare</h3>
+                <p class="problem-description">
+                    After a full day's graft, you're stuck doing quotes, invoices, and chasing 
+                    payments instead of spending time with family.
+                </p>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-emoji">🎯</div>
+                <h3 class="problem-title">No Time for Marketing</h3>
+                <p class="problem-description">
+                    You know you should be on social media and Google, but who has time to post 
+                    when you're booked solid (or desperately need to be)?
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section">
+        <div class="section-header">
+            <h2 class="section-title">Your AI Assistant That Actually Gets Trade Work</h2>
+            <p class="section-subtitle">Not another app to learn—just speak naturally and let AI handle the rest</p>
+        </div>
+
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="solution-icon">📞</div>
+                <h3 class="solution-title">Never Miss a Lead</h3>
+                <p>AI answers every call professionally, books appointments, and texts you the details</p>
+                <div class="solution-features">
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>24/7 professional answering</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Books directly into your calendar</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Instant SMS with job details</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-icon">🎙️</div>
+                <h3 class="solution-title">Voice-First Admin</h3>
+                <p>Speak your notes on-site, get professional quotes and invoices instantly</p>
+                <div class="solution-features">
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>"Just finished at Mrs Smith's..."</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Auto-generates invoice</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Sends to customer immediately</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-icon">📲</div>
+                <h3 class="solution-title">Automatic Marketing</h3>
+                <p>Every job becomes social proof that brings in more work</p>
+                <div class="solution-features">
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Before/after photos → social posts</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Happy customers → Google reviews</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="check">✓</span>
+                        <span>Builds your online presence daily</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-section" id="how">
+        <div class="section-header">
+            <h2 class="section-title">See It In Action</h2>
+            <p class="section-subtitle">Real examples from real trades using Traidee AI</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-content">
+                    <span class="step-number">1</span>
+                    <h3>Customer Calls While You're Working</h3>
+                    <p>You're installing a boiler. Phone rings. Normally you'd miss it, but your AI assistant answers professionally with your business name.</p>
+                    <div class="example-box">
+                        <div class="example-label">ELECTRICIAN EXAMPLE:</div>
+                        <p>"Thanks for calling Spark Electric. I understand you need help with outdoor lighting. Let me check our schedule..."</p>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div style="font-size: 4rem;">🔧</div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);">You keep working</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-content">
+                    <span class="step-number">2</span>
+                    <h3>Speak Your Admin Into Existence</h3>
+                    <p>Job done. In your van, just say what you did. AI turns your voice into a professional invoice and sends it.</p>
+                    <div class="example-box">
+                        <div class="example-label">PLUMBER EXAMPLE:</div>
+                        <p>"Fixed the leak at 42 High Street, replaced two valves, took an hour and a half"</p>
+                        <p style="margin-top: 0.5rem; font-style: italic;">→ Professional invoice sent: £180 + VAT</p>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div style="font-size: 4rem;">🎙️</div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);">30 seconds vs 30 minutes</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-content">
+                    <span class="step-number">3</span>
+                    <h3>Your Work Markets Itself</h3>
+                    <p>Snap a photo of the finished job. AI creates the post, writes the caption, and shares it. Your customers see you're busy and professional.</p>
+                    <div class="example-box">
+                        <div class="example-label">CARPENTER EXAMPLE:</div>
+                        <p>Photo: Custom shelving unit<br>
+                        AI writes: "Another happy customer in Clapham! Custom oak shelving maximising every inch of space 📐"</p>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <div style="font-size: 4rem;">📱</div>
+                    <p style="margin-top: 1rem; color: var(--text-gray);">Building reputation automatically</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries-section" id="industries">
+        <div class="section-header">
+            <h2 class="section-title">Built for Every Trade</h2>
+            <p class="section-subtitle">Customised to speak your language and know your business</p>
+        </div>
+
+        <div class="industries-grid">
+            <div class="industry-card">
+                <div class="industry-icon">🔧</div>
+                <div class="industry-name">Plumbers</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">⚡</div>
+                <div class="industry-name">Electricians</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🔨</div>
+                <div class="industry-name">Carpenters</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🏠</div>
+                <div class="industry-name">Builders</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🎨</div>
+                <div class="industry-name">Painters</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🚚</div>
+                <div class="industry-name">Movers</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🌡️</div>
+                <div class="industry-name">HVAC</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🚿</div>
+                <div class="industry-name">Bathroom Fitters</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🏡</div>
+                <div class="industry-name">Roofers</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🌳</div>
+                <div class="industry-name">Landscapers</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🔐</div>
+                <div class="industry-name">Locksmiths</div>
+            </div>
+            <div class="industry-card">
+                <div class="industry-icon">🪟</div>
+                <div class="industry-name">Window Fitters</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Start Catching Every Lead Today</h2>
+            <p class="cta-subtitle">
+                Join 100+ trades already using AI to grow their business
+            </p>
+            <a href="#" class="cta-button" onclick="alert('Signup form would open here')">
+                Try Free for 14 Days
+            </a>
+            <p class="trust-text">
+                No credit card • No complex setup • Cancel anytime<br>
+                <strong>Average user catches 3 more jobs in their first week</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Contact</a>
+            <a href="#">Help</a>
+        </div>
+        <p>&copy; 2024 Traidee AI. Built by trades, for trades.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">
+            Making AI work for the people who make everything else work.
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards and sections
+        document.querySelectorAll('.problem-card, .solution-card, .step, .industry-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Industry card interactions
+        document.querySelectorAll('.industry-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const industry = this.querySelector('.industry-name').textContent;
+                alert(`Learn more about Traidee AI for ${industry} coming soon!`);
+            });
+        });
+    </script>
+</body>
+</html>
